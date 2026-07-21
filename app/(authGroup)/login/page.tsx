@@ -1,67 +1,33 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label" 
+import React from 'react';
+import { Lock } from "lucide-react";
 
-export default function loginPage() {
-  console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL);
+import LoginForm from '../_components/loginFrom';
+
+const LoginPage = () => {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
-        <CardAction>
-          <Button variant="link">Sign Up</Button>
-        </CardAction>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
+        <div className="relative  flex min-h-screen justify-center items-center bg-slate-50/50 p-4 font-sans text-slate-900 antialiased selection:bg-slate-900 selection:text-slate-50">
+      {/* Background Soft Subtle Elements */}
+      <div className="absolute top-1/3 left-1/2 -z-10 h-96 w-96 -translate-x-1/2 rounded-full bg-slate-200/50 blur-[120px]" />
 
-      
+      {/* Modern Clean White Card Wrapper */}
+      <div className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all hover:shadow-2xl hover:shadow-slate-200/60">
         
-      </CardFooter>
-    </Card>
-  )
-}
+        {/* Header Section */}
+        <div className="mb-8 space-y-2 text-center">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 text-slate-900 shadow-sm">
+            <Lock className="h-5 w-5 text-slate-700" />
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+            Welcome back
+          </h1>
+          <p className="text-sm text-slate-500">
+            Enter your details to access your account
+          </p>
+        </div>
+        <LoginForm></LoginForm>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
