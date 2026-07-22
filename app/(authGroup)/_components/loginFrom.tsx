@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { loginAction } from "../_actions/loginAction";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function CleanWhiteLoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [state,action,pending] =useActionState(loginAction,false)
+  const [state,action,pending] =useActionState(loginAction,false);
+  const router = useRouter();
 
   useEffect(()=>{
     if(!state) return
@@ -21,7 +23,8 @@ export default function CleanWhiteLoginForm() {
       toast.error(state.message || "LogIn Failed!")
     }
     if(state.success){
-      toast.success(state.message || "LogIn Successfully")
+      toast.success(state.message || "LogIn Successfully");
+      router.push("/dashboard")
     }
   },[state])
 
