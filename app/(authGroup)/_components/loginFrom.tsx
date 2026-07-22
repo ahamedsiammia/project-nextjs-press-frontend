@@ -1,20 +1,34 @@
 "use client"
-import React, { useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { loginAction } from "../_actions/loginAction";
+import { toast } from "sonner";
 
 export default function CleanWhiteLoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [state,action,pending] =useActionState(loginAction,false)
+
+  useEffect(()=>{
+    if(!state) return
+    if(!state.success){
+
+      toast.error(state.message || "LogIn Failed!")
+    }
+    if(state.success){
+      toast.success(state.message || "LogIn Successfully")
+    }
+  },[state])
+
   return (
    <div>
         {/* Form Body */}
-        <form action={loginAction}  className="space-y-5">
+        <form action={action}  className="space-y-5">
           {/* Email Field */}
           <div className="space-y-2">
             <Label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-slate-600">
@@ -75,8 +89,9 @@ export default function CleanWhiteLoginForm() {
           <Button
             type="submit"
             className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all active:scale-[0.99]"
-          >
-            Sign In
+          >{
+            pending ? "Processing..." : "Sign In" 
+          }
           </Button>
 
           {/* Footer */}

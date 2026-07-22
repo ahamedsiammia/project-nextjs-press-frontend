@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Outfit, Oxanium } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
 
 const oxaniumHeading = Oxanium({subsets:['latin'],variable:'--font-heading'});
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", "font-sans", outfit.variable, oxaniumHeading.variable)}
     >
-      <body >{children}</body>
+      <body >{children}
+        <Toaster position="top-right" richColors />
+      </body>
     </html>
   );        
 }

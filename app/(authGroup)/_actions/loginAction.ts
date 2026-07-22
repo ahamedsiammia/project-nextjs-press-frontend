@@ -1,9 +1,15 @@
 "use server"
-export const loginAction =async(fromData : FormData)=>{
+type loginState ={
+  success: boolean,
+  status: number,
+  message: string,
+  data : object
+}
+export const loginAction =async(prevState:loginState,fromData : FormData)=>{
     console.log(fromData);
     const email = fromData.get("email");
     const password = fromData.get("password");
-
+    console.log("prevState that", prevState);
     const payload = {
         email,
         password
@@ -22,5 +28,6 @@ export const loginAction =async(fromData : FormData)=>{
     const result = await res.json();
 
     console.log(result);
+    return result
 }    
  
