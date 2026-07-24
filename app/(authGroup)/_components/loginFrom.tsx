@@ -24,7 +24,17 @@ export default function CleanWhiteLoginForm() {
     }
     if(state.success){
       toast.success(state.message || "LogIn Successfully");
-      router.push("/dashboard")
+
+      if(state.data.role ==="USER"){
+
+        router.push("/dashboard")
+      }
+      else if(state.data.role === "AUTHOR"){
+        router.push("/authorDashboard")
+      }
+      else if(state.data.role === "ADMIN"){
+        router.push("/adminDashboard")
+      }
     }
   },[state])
 

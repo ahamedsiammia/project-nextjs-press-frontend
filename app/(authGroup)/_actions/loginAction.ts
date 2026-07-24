@@ -2,12 +2,17 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import jwt, { JwtPayload } from "jsonwebtoken"
 
 type loginState ={
   success: boolean,
   status: number,
   message: string,
   data : {
+    id : string,
+    name : string,
+    email : string,
+    role : string,
     accessToken : string,
     refreshToken : string
   }
@@ -46,6 +51,10 @@ export const loginAction =async(prevState:loginState,fromData : FormData)=>{
             maxAge : 60 * 60 * 24 *  7,
             sameSite : "lax"
         })
+
+        // const decodedToken = await jwt.decode(accessToken) as JwtPayload
+
+        // console.log("decoded token",decodedToken);
 
         // redirect("/dashboard")
     }
