@@ -22,7 +22,6 @@ export const loginAction =async(prevState:loginState,fromData : FormData)=>{
         password
     };
 
-    console.log(process.env.BACKEND_API_URL);
 
     const res = await fetch(`http://localhost:5000/api/user/login`,{
         method : "POST",

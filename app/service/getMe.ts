@@ -14,7 +14,7 @@ export const getMe =async()=>{
        }
     };
 
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/user/me`,{
+    const res = await fetch(`http://localhost:5000/api/user/me`,{
         headers : {
             // authorization : accessToken as unknown as string
             // authorization : `${accessToken}`
